@@ -1,0 +1,43 @@
+<idea-plugin>
+  <id>BambooPlugin</id>
+  <name>Bamboo Plugin</name>
+  <version>1.0</version>
+  <vendor email="wenchao.kong@auspost.com.au">Mobile team</vendor>
+
+  <description><![CDATA[
+      Effortless to check plan and build status.<br>
+      <em>most HTML tags may be used</em>
+    ]]></description>
+
+  <change-notes><![CDATA[
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>
+    ]]>
+  </change-notes>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="145.0"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
+
+  <actions>
+    <!-- Add your actions here -->
+      <!--<action id="com.bamboo.plugin.BambooPlugin" class="models.com.bamboo.plugin.BambooPlugin" text="com.bamboo.plugin.BambooPlugin"-->
+              <!--description="view plan and build status">-->
+          <!--<add-to-group group-id="ToolsMenu" anchor="first"/>-->
+          <!--<keyboard-shortcut keymap="$default" first-keystroke="shift meta B"/>-->
+      <!--</action>-->
+    <action id="com.bamboo.plugin.BambooPlugin" class="com.bamboo.plugin.BambooPlugin" text="BambooPlugin" description="BambooPlugin" icon="icon.png">
+      <add-to-group group-id="NavBarToolBarOthers" anchor="first"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt B"/>
+    </action>
+  </actions>
+</idea-plugin>
