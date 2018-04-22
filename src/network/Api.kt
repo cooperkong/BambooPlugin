@@ -9,6 +9,9 @@ import retrofit2.http.*
 
 interface Api {
 
+    @GET()
+    fun testConnection(@Header("Authorization") authorization: String ) : Completable
+
     @GET("project")
     fun getProjects() : Observable<Project>
 
