@@ -49,7 +49,7 @@ public class MainForm implements PlanPresenterContract.UI, BranchPresenterContra
     public static void main(String[] args) {
         IconFontSwing.register(FontAwesome.getIconFont());
         MainForm deviceFarm = new MainForm();
-        JFrame frame = new JFrame("com.bamboo.plugin.BambooPlugin");
+        JFrame frame = new JFrame("BambooPlugin");
         frame.setContentPane(deviceFarm.rootPanel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
