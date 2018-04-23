@@ -2,17 +2,15 @@ package ui.auth;
 
 import jiconfont.icons.FontAwesome;
 import jiconfont.swing.IconFontSwing;
+import kotlin.Unit;
 import org.jetbrains.annotations.NotNull;
 import presenter.Presenter;
 import presenter.auth.LoginPresenter;
 import presenter.auth.LoginPresenterContract;
 import ui.AsyncJButton;
-import ui.MainForm;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class LogInForm implements LoginPresenterContract.UI{
     private JTextField url;
@@ -38,7 +36,19 @@ public class LogInForm implements LoginPresenterContract.UI{
 
     private void init() {
         loginPresenter = new LoginPresenter(this);
-        testConnectionBtn.addActionListener(e -> loginPresenter.login(username.getText(), new String(password.getPassword())));
+        testConnectionBtn.addActionListener(e ->
+                        loginPresenter.testConnection(
+                            () -> {testConnectionBtn.startLoading(loginPresenter); return Unit.INSTANCE;},
+                            () -> {
+                                // show a dialog showing test was successful
+                                JOptionPane.showMessageDialog(loginPanel,
+                                        "Info",
+                                        "Connection successful.",
+                                        JOptionPane.PLAIN_MESSAGE);
+                                testConnectionBtn.stopLoading(loginPresenter);
+                                return Unit.INSTANCE;
+                            }
+                        ));
     }
 
     void createUIComponents(){
