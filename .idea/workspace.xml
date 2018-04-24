@@ -2,80 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2855e4b3-4eda-44a8-91fc-0e1886bfc0af" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/com_github_jiconfont_jiconfont_font_awesome_4_7_0_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/com_github_jiconfont_jiconfont_swing_1_0_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_2_6_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/com_squareup_okhttp3_logging_interceptor_3_10_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/com_squareup_retrofit2_adapter_rxjava2_2_2_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/com_squareup_retrofit2_converter_gson_Release.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/com_squareup_retrofit2_retrofit_2_4_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/io_reactivex_rxswing_0_27_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/org_reactivestreams_reactive_streams_1_0_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/presenter/build/BuildPresenter.kt" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/bamboo/plugin/BambooPlugin.java" afterPath="$PROJECT_DIR$/src/main/java/com/bamboo/plugin/BambooPlugin.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/bamboo/plugin/icon.png" afterPath="$PROJECT_DIR$/src/main/java/com/bamboo/plugin/icon.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/Constants.kt" afterPath="$PROJECT_DIR$/src/main/java/models/Constants.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/auth/BambooPluginSettings.kt" afterPath="$PROJECT_DIR$/src/main/java/models/auth/BambooPluginSettings.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/branch/Branch.kt" afterPath="$PROJECT_DIR$/src/main/java/models/branch/Branch.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/branch/BranchItem.kt" afterPath="$PROJECT_DIR$/src/main/java/models/branch/BranchItem.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/branch/Branches.kt" afterPath="$PROJECT_DIR$/src/main/java/models/branch/Branches.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/branch/LatestCurrentlyActive.kt" afterPath="$PROJECT_DIR$/src/main/java/models/branch/LatestCurrentlyActive.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/branch/Link.kt" afterPath="$PROJECT_DIR$/src/main/java/models/branch/Link.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/expandedresult/Artifacts.kt" afterPath="$PROJECT_DIR$/src/main/java/models/expandedresult/Artifacts.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/expandedresult/Comments.kt" afterPath="$PROJECT_DIR$/src/main/java/models/expandedresult/Comments.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/expandedresult/EntityKey.kt" afterPath="$PROJECT_DIR$/src/main/java/models/expandedresult/EntityKey.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/expandedresult/JiraIssues.kt" afterPath="$PROJECT_DIR$/src/main/java/models/expandedresult/JiraIssues.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/expandedresult/Labels.kt" afterPath="$PROJECT_DIR$/src/main/java/models/expandedresult/Labels.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/expandedresult/Link.kt" afterPath="$PROJECT_DIR$/src/main/java/models/expandedresult/Link.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/expandedresult/Master.kt" afterPath="$PROJECT_DIR$/src/main/java/models/expandedresult/Master.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/expandedresult/Plan.kt" afterPath="$PROJECT_DIR$/src/main/java/models/expandedresult/Plan.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/expandedresult/PlanKey.kt" afterPath="$PROJECT_DIR$/src/main/java/models/expandedresult/PlanKey.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/expandedresult/PlanResultKey.kt" afterPath="$PROJECT_DIR$/src/main/java/models/expandedresult/PlanResultKey.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/expandedresult/Result.kt" afterPath="$PROJECT_DIR$/src/main/java/models/expandedresult/Result.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/expandedresult/ResultItem.kt" afterPath="$PROJECT_DIR$/src/main/java/models/expandedresult/ResultItem.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/expandedresult/Results.kt" afterPath="$PROJECT_DIR$/src/main/java/models/expandedresult/Results.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/expandedresult/StageItem.kt" afterPath="$PROJECT_DIR$/src/main/java/models/expandedresult/StageItem.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/expandedresult/Stages.kt" afterPath="$PROJECT_DIR$/src/main/java/models/expandedresult/Stages.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/expandedresult/VcsRevisions.kt" afterPath="$PROJECT_DIR$/src/main/java/models/expandedresult/VcsRevisions.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/project/Link.kt" afterPath="$PROJECT_DIR$/src/main/java/models/project/Link.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/project/Project.kt" afterPath="$PROJECT_DIR$/src/main/java/models/project/Project.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/project/ProjectItem.kt" afterPath="$PROJECT_DIR$/src/main/java/models/project/ProjectItem.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/project/Projects.kt" afterPath="$PROJECT_DIR$/src/main/java/models/project/Projects.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/network/AcyncTask.kt" afterPath="$PROJECT_DIR$/src/main/java/network/AcyncTask.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/network/Api.kt" afterPath="$PROJECT_DIR$/src/main/java/network/Api.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/network/HttpClient.kt" afterPath="$PROJECT_DIR$/src/main/java/network/HttpClient.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/presenter/IconPresenter.kt" afterPath="$PROJECT_DIR$/src/main/java/presenter/IconPresenter.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/presenter/Presenter.kt" afterPath="$PROJECT_DIR$/src/main/java/presenter/Presenter.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/presenter/auth/LoginPresenter.kt" afterPath="$PROJECT_DIR$/src/main/java/presenter/auth/LoginPresenter.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/presenter/branch/BranchPresenter.kt" afterPath="$PROJECT_DIR$/src/main/java/presenter/branch/BranchPresenter.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/presenter/plan/PlanPresenter.kt" afterPath="$PROJECT_DIR$/src/main/java/presenter/plan/PlanPresenter.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/AsyncJButton.java" afterPath="$PROJECT_DIR$/src/main/java/ui/AsyncJButton.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/AsyncLoadUi.kt" afterPath="$PROJECT_DIR$/src/main/java/ui/AsyncLoadUi.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/BuildDetailTable.kt" afterPath="$PROJECT_DIR$/src/main/java/ui/BuildDetailTable.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/BuildDetailUpdater.kt" afterPath="$PROJECT_DIR$/src/main/java/ui/BuildDetailUpdater.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/MainForm.form" afterPath="$PROJECT_DIR$/src/main/java/ui/MainForm.form" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/MainForm.java" afterPath="$PROJECT_DIR$/src/main/java/ui/MainForm.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/auth/LogInForm.form" afterPath="$PROJECT_DIR$/src/main/java/ui/auth/LogInForm.form" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/auth/LogInForm.java" afterPath="$PROJECT_DIR$/src/main/java/ui/auth/LogInForm.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/listener/MouseListener.kt" afterPath="$PROJECT_DIR$/src/main/java/ui/listener/MouseListener.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/renderer/BuildTableBuildColumnRenderer.kt" afterPath="$PROJECT_DIR$/src/main/java/ui/renderer/BuildTableBuildColumnRenderer.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/renderer/BuildTableBuildReasonColumnRenderer.kt" afterPath="$PROJECT_DIR$/src/main/java/ui/renderer/BuildTableBuildReasonColumnRenderer.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/renderer/BuildTableBuildTestColumnRenderer.kt" afterPath="$PROJECT_DIR$/src/main/java/ui/renderer/BuildTableBuildTestColumnRenderer.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/renderer/ListGIFIconObserver.kt" afterPath="$PROJECT_DIR$/src/main/java/ui/renderer/ListGIFIconObserver.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/renderer/ListItemWithIconRender.kt" afterPath="$PROJECT_DIR$/src/main/java/ui/renderer/ListItemWithIconRender.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/renderer/TableGIFIconObserver.kt" afterPath="$PROJECT_DIR$/src/main/java/ui/renderer/TableGIFIconObserver.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/util/DialogUtil.kt" afterPath="$PROJECT_DIR$/src/main/java/util/DialogUtil.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/util/IconUtil.kt" afterPath="$PROJECT_DIR$/src/main/java/util/IconUtil.kt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/util/images/building.gif" afterPath="$PROJECT_DIR$/src/main/java/util/images/building.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BambooPlugin.zip" afterPath="$PROJECT_DIR$/BambooPlugin.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.travis.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BambooPlugin.iml" afterPath="$PROJECT_DIR$/BambooPlugin.iml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -142,7 +70,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HttpClient.kt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HttpClient.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/network/HttpClient.kt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-43">
@@ -150,6 +78,16 @@
               <folding>
                 <element signature="e#17#333#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".travis.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.travis.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -638,6 +576,7 @@
         <option value="$PROJECT_DIR$/BambooPlugin.iml" />
         <option value="$PROJECT_DIR$/src/main/java/network/HttpClient.kt" />
         <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/.travis.yml" />
       </list>
     </option>
   </component>
@@ -671,35 +610,6 @@
             <path>
               <item name="BambooPlugin" type="b2602c69:ProjectViewProjectNode" />
               <item name="BambooPlugin" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="BambooPlugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BambooPlugin" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BambooPlugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BambooPlugin" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BambooPlugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BambooPlugin" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BambooPlugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BambooPlugin" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="BambooPlugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BambooPlugin" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BambooPlugin" type="b2602c69:ProjectViewProjectNode" />
@@ -1178,6 +1088,14 @@
           <folding>
             <element signature="e#17#333#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
