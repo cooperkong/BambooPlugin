@@ -21,12 +21,12 @@ class BuildDetailTable(private val table: JTable, val buildResult : Result) {
         table.setShowGrid(false)
         table.rowHeight = 50
         table.model = object : AbstractTableModel() {
-            override fun getRowCount(): Int = buildResult.results.result!!.size
+            override fun getRowCount(): Int = buildResult.results.result.size
 
             override fun getColumnCount(): Int = 4
 
             override fun getValueAt(rowIndex: Int, columnIndex: Int) : Any {
-                val result = buildResult.results.result!![rowIndex]
+                val result = buildResult.results.result[rowIndex]
                 when (columnIndex) {
                     0 -> return result.buildNumber
                     1 -> return result.buildReason
@@ -49,7 +49,7 @@ class BuildDetailTable(private val table: JTable, val buildResult : Result) {
         // attach listener on test result column to open test results in browser.
         table.addMouseListener(object : MouseAdapter(){
             override fun mousePressed(e: MouseEvent) {
-                val buildResult = buildResult.results.result!![table.rowAtPoint(e.point)]
+                val buildResult = buildResult.results.result[table.rowAtPoint(e.point)]
                 if (Desktop.isDesktopSupported() &&
                         table.columnAtPoint(e.point) == 3 &&
                         (buildResult.buildTestSummary.endsWith("passed") ||

@@ -18,7 +18,7 @@ class IconUtil {
             }
             (NOT_BUILT) -> IconFontSwing.buildIcon(FontAwesome.MINUS_CIRCLE, 16F, Gray._112)
             (QUEUED) -> IconFontSwing.buildIcon(FontAwesome.CLOCK_O, 16F, Color(53, 114, 176))
-            (IN_PROGRESS) -> ImageIcon(this.javaClass.getResource("images/building.gif"))
+            (IN_PROGRESS) -> ImageIcon(this::class.java.getResource("images/building.gif"))
             else -> IconFontSwing.buildIcon(FontAwesome.MINUS_CIRCLE, 16F, Gray._112)
         }
     }
