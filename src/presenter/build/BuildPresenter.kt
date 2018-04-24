@@ -1,7 +1,7 @@
 package presenter.build
 
 import models.expandedresult.Result
-import network.AsyncTask
+import network.AsyncTransformer
 import network.HttpClient
 import presenter.IconPresenter
 import presenter.Presenter
@@ -16,27 +16,22 @@ class BuildPresenter(val ui : BuildPresenterContract.UI) : BuildPresenterContrac
 
     override fun loadBuilds(key: String) {
         ui.startLoading(this)
-        AsyncTask.toAsyncWorker<Result, Result>( {api.getResult(key).blockingFirst()}
-                , {data ->
-            run {
-                buildResult = data
-                ui.stopLoading(this)
-                ui.showBranchResult(data)
-            }
-        }).execute()
+        api.getResult(key)
+                .compose(AsyncTransformer<Result, Result>())
+                .subscribe {
+                    buildResult = it
+                    ui.stopLoading(this)
+                    ui.showBranchResult(it)
+                }
     }
 
     override fun stopBuild(key: String, onStart: () -> Unit, onFinish: () -> Unit) {
         onStart.invoke()
-        AsyncTask.toAsyncWorker<Unit, Unit>(
-                {
-                    api.stopBuildsOrJobs(key).blockingAwait()
+        api.stopBuildsOrJobs(key)
+                .compose(AsyncTransformer<Any, Any>())
+                .subscribe {
+                    onFinish.invoke()
                 }
-                , { _ ->
-                    run {
-                        onFinish.invoke()
-                    }
-                }).execute()
     }
 
     override fun getIcon(index: Int): Icon = getIcon(buildResult.results.result!![index].lifeCycleState, buildResult.results.result!![index].buildState)

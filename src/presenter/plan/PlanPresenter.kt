@@ -1,7 +1,7 @@
 package presenter.plan
 
 import models.expandedresult.Result
-import network.AsyncTask
+import network.AsyncTransformer
 import network.HttpClient
 import presenter.Presenter
 import ui.AsyncLoadUi
@@ -12,13 +12,12 @@ class PlanPresenter(private val ui : PlanPresenterContract.UI) : PlanPresenterCo
 
     override fun loadPlan() {
         ui.startLoading(this)
-        AsyncTask.toAsyncWorker<Result, Result>( {api.getResult(showStage = "").blockingFirst()}
-        , {data ->
-            run {
-                ui.stopLoading(this)
-                ui.showPlanList(data)
-            }
-        }).execute()
+        api.getResult(showStage = "")
+                .compose(AsyncTransformer<Result, Result>())
+                .subscribe {
+                    ui.stopLoading(this)
+                    ui.showPlanList(it)
+                }
     }
 
 }

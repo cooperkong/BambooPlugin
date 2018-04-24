@@ -1,7 +1,6 @@
 package presenter.auth
 
-import network.AsyncTask
-import network.AsyncTranformer
+import network.AsyncTransformer
 import network.HttpClient
 import presenter.Presenter
 import ui.AsyncLoadUi
@@ -10,7 +9,7 @@ class LoginPresenter(val ui : LoginPresenterContract.UI) : LoginPresenterContrac
 
     override fun testConnection(onStart : () -> Unit, onFinish : () -> Unit) {
         api.testConnection()
-                .compose(AsyncTranformer)
+                .compose(AsyncTransformer<Any, Any>())
                 .doOnSubscribe {
                     onStart.invoke()
                 }
@@ -22,13 +21,7 @@ class LoginPresenter(val ui : LoginPresenterContract.UI) : LoginPresenterContrac
     private val api = HttpClient.api
 
     override fun login(username: String, password: String, onStart: () -> Unit, onFinish: () -> Unit) {
-        ui.startLoading(this)
-        AsyncTask.toAsyncWorker<Unit, Unit>( {api.testConnection().blockingAwait()}
-                , { _ ->
-            run {
-                ui.stopLoading(this)
-            }
-        }).execute()
+
     }
 
 }

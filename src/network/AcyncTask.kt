@@ -7,32 +7,28 @@ import javax.swing.SwingWorker
 /**
  * Created by wenchaokong on 5/8/17.
  */
-object AsyncTask {
-
-    fun <T, V> toAsyncWorker(asyncTask : () -> T,
-                             onFinish : (T) -> Unit,
-                             onError : (Throwable) -> Unit = {throwable -> throwable.printStackTrace()}): SwingWorker<T, V> {
-        return object : SwingWorker<T, V>() {
-            @Throws(Exception::class)
-            override fun doInBackground(): T {
-                return asyncTask.invoke()
-            }
-
-            override fun done() {
-                try {
-                    onFinish.invoke(get())
-                } catch (e: InterruptedException) {
-                    onError(e)
-                } catch (e: ExecutionException) {
-                    onError(e)
+class AsyncTransformer<UpStream, DownStream> : CompletableTransformer, ObservableTransformer<UpStream, DownStream>{
+    override fun apply(upstream: Observable<UpStream>?): ObservableSource<DownStream> {
+        return Observable.create {
+            object : SwingWorker<Any, Any>() {
+                @Throws(Exception::class)
+                override fun doInBackground() : UpStream{
+                    return upstream!!.blockingFirst()
                 }
-            }
+
+                override fun done() {
+                    try {
+                        it.onComplete()
+                    } catch (e: InterruptedException) {
+                        it.onError(e)
+                    } catch (e: ExecutionException) {
+                        it.onError(e)
+                    }
+                }
+            }.execute()
         }
     }
-}
 
-
-object AsyncTranformer : CompletableTransformer{
     override fun apply(upstream: Completable?): CompletableSource {
         return Completable.create {
             object : SwingWorker<Any, Any>() {
