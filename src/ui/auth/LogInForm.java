@@ -8,6 +8,7 @@ import presenter.Presenter;
 import presenter.auth.LoginPresenter;
 import presenter.auth.LoginPresenterContract;
 import ui.AsyncJButton;
+import util.DialogUtilKt;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,10 +42,7 @@ public class LogInForm implements LoginPresenterContract.UI{
                             () -> {testConnectionBtn.startLoading(loginPresenter); return Unit.INSTANCE;},
                             () -> {
                                 // show a dialog showing test was successful
-                                JOptionPane.showMessageDialog(loginPanel,
-                                        "Info",
-                                        "Connection successful.",
-                                        JOptionPane.PLAIN_MESSAGE);
+                                DialogUtilKt.showSuccessDialog(loginPanel);
                                 testConnectionBtn.stopLoading(loginPresenter);
                                 return Unit.INSTANCE;
                             }

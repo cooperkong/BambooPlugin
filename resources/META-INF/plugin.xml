@@ -40,4 +40,8 @@
       <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt B"/>
     </action>
   </actions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationService serviceInterface="models.auth.BambooPluginSettings" serviceImplementation="models.auth.BambooPluginSettings"/>
+  </extensions>
 </idea-plugin>
