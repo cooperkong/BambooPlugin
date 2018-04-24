@@ -1,0 +1,53 @@
+buildscript {
+    ext.kotlin_version = '1.2.40'
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots"
+        }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+plugins {
+    id "org.jetbrains.intellij" version "0.3.1"
+    id "org.jetbrains.kotlin.jvm" version "1.2.40"
+}
+
+apply plugin: 'idea'
+apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'java'
+apply plugin: 'java-library'
+apply plugin: "kotlin"
+
+
+intellij {
+    version '2017.2.5'
+    pluginName 'BambooPlugin'
+}
+
+
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+        mavenLocal()
+    }
+}
+
+dependencies {
+    implementation "com.google.code.gson:gson:2.6.2"
+
+    implementation "com.github.jiconfont:jiconfont-font_awesome:4.7.0.0"
+    implementation "com.github.jiconfont:jiconfont-swing:1.0.1"
+
+    implementation "com.squareup.okhttp3:logging-interceptor:3.10.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.2.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.2.0"
+
+    implementation "org.reactivestreams:reactive-streams:1.0.2"
+}

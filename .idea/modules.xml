@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BambooPlugin.iml" filepath="$PROJECT_DIR$/BambooPlugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BambooPlugin_main.iml" filepath="$PROJECT_DIR$/.idea/modules/BambooPlugin_main.iml" group="BambooPlugin" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BambooPlugin_test.iml" filepath="$PROJECT_DIR$/.idea/modules/BambooPlugin_test.iml" group="BambooPlugin" />
     </modules>
   </component>
 </project>
