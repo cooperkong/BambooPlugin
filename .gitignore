@@ -2,6 +2,7 @@ out/
 .idea/
 .gradle/
 build/
+.idea/workspace.xml
 gradle/
 gradlew
 gradlew.bat
