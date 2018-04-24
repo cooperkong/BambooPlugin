@@ -9,6 +9,13 @@ import retrofit2.http.*
 
 interface Api {
 
+    // just to test the https connection
+    @GET("userlogin.action")
+    fun testConnection() : Completable
+
+    @GET("")
+    fun login(@Header("Authorization") authorization: String ) : Completable
+
     @GET("project")
     fun getProjects() : Observable<Project>
 
