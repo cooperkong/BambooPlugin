@@ -4,11 +4,11 @@ import models.branch.Branch
 import network.AsyncTransformer
 import network.HttpClient
 import presenter.Presenter
-import presenter.build.BuildPresenterContract
+import presenter.builds.BuildPresenterContract
 import ui.AsyncLoadUi
 
 class BranchPresenter(val ui : BranchPresenterContract.BranchUI,
-                      val buildPresenter: BuildPresenterContract) : BranchPresenterContract {
+                      private val buildPresenter: BuildPresenterContract) : BranchPresenterContract {
     private val api = HttpClient.api
 
     override fun startNewBuild(key: String, onStart : () -> Unit, onFinish : () -> Unit) {

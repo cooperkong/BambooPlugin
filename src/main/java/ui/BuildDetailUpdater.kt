@@ -3,7 +3,7 @@ package ui
 import models.IN_PROGRESS
 import models.QUEUED
 import models.expandedresult.ResultItem
-import presenter.build.BuildPresenterContract
+import presenter.builds.BuildPresenterContract
 import javax.swing.JComponent
 import javax.swing.JPanel
 
