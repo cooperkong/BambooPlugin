@@ -35,7 +35,7 @@
           <!--<add-to-group group-id="ToolsMenu" anchor="first"/>-->
           <!--<keyboard-shortcut keymap="$default" first-keystroke="shift meta B"/>-->
       <!--</action>-->
-    <action id="com.bamboo.plugin.BambooPlugin" class="com.bamboo.plugin.BambooPlugin" text="BambooPlugin" description="BambooPlugin" icon="icon.png">
+    <action id="com.bamboo.plugin.BambooPlugin" class="com.bamboo.plugin.BambooPlugin" text="BambooPlugin" description="BambooPlugin" icon="/icons/icon.png">
       <add-to-group group-id="NavBarToolBarOthers" anchor="first"/>
       <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt B"/>
     </action>

@@ -40,14 +40,14 @@ allprojects {
 }
 
 dependencies {
-    implementation "com.google.code.gson:gson:2.6.2"
+    compile "com.google.code.gson:gson:2.6.2"
 
-    implementation "com.github.jiconfont:jiconfont-font_awesome:4.7.0.0"
-    implementation "com.github.jiconfont:jiconfont-swing:1.0.1"
+    compile "com.github.jiconfont:jiconfont-font_awesome:4.7.0.0"
+    compile "com.github.jiconfont:jiconfont-swing:1.0.1"
 
-    implementation "com.squareup.okhttp3:logging-interceptor:3.10.0"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:2.2.0"
-    implementation "com.squareup.retrofit2:converter-gson:2.2.0"
+    compile "com.squareup.okhttp3:logging-interceptor:3.10.0"
+    compile "com.squareup.retrofit2:adapter-rxjava2:2.2.0"
+    compile "com.squareup.retrofit2:converter-gson:2.2.0"
 
-    implementation "org.reactivestreams:reactive-streams:1.0.2"
+    compile "org.reactivestreams:reactive-streams:1.0.2"
 }
