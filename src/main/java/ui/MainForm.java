@@ -46,17 +46,8 @@ public class MainForm implements PlanPresenterContract.UI, BranchPresenterContra
     private ActionListener runBtnListener;
     private ListSelectionListener buildSelectionListener;
 
-    public static void main(String[] args) {
-        IconFontSwing.register(FontAwesome.getIconFont());
-        MainForm deviceFarm = new MainForm();
-        JFrame frame = new JFrame("BambooPlugin");
-        frame.setContentPane(deviceFarm.rootPanel);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.pack();
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/4);
-        frame.setVisible(true);
-        deviceFarm.init();
+    public JPanel getRootPanel() {
+        return rootPanel;
     }
 
     void createUIComponents(){
@@ -67,7 +58,7 @@ public class MainForm implements PlanPresenterContract.UI, BranchPresenterContra
         buildLoadingIcon.setVisible(false);
     }
 
-    private void init() {
+    public void init() {
         planPresenter = new PlanPresenter(this);
         buildPresenter = new BuildPresenter(this);
         branchPresenter = new BranchPresenter(this, buildPresenter);

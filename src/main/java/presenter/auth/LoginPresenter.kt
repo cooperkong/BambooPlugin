@@ -7,6 +7,8 @@ import ui.AsyncLoadUi
 
 class LoginPresenter(val ui : LoginPresenterContract.UI) : LoginPresenterContract{
 
+    private val api = HttpClient.api
+
     override fun testConnection(onStart : () -> Unit, onFinish : () -> Unit) {
         api.testConnection()
                 .compose(AsyncTransformer<Any, Any>())
@@ -17,8 +19,6 @@ class LoginPresenter(val ui : LoginPresenterContract.UI) : LoginPresenterContrac
                     onFinish.invoke()
                 }
     }
-
-    private val api = HttpClient.api
 
     override fun login(username: String, password: String, onStart: () -> Unit, onFinish: () -> Unit) {
 

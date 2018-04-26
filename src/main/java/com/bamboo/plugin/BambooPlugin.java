@@ -9,6 +9,6 @@ public class BambooPlugin extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
-        LogInForm.main(null);
+        new LogInForm().show();
     }
 }

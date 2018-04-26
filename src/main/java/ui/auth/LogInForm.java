@@ -8,6 +8,7 @@ import presenter.Presenter;
 import presenter.auth.LoginPresenter;
 import presenter.auth.LoginPresenterContract;
 import ui.AsyncJButton;
+import ui.MainForm;
 import util.DialogUtilKt;
 
 import javax.swing.*;
@@ -21,18 +22,24 @@ public class LogInForm implements LoginPresenterContract.UI{
     private AsyncJButton loginBtn;
     private JPanel loginPanel;
     private LoginPresenter loginPresenter;
+    private JFrame frame = new JFrame("BambooPlugin");
+    Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
-    public static void main(String[] args) {
+    static {
         IconFontSwing.register(FontAwesome.getIconFont());
-        LogInForm logInForm = new LogInForm();
-        JFrame frame = new JFrame("BambooPlugin");
-        frame.setContentPane(logInForm.loginPanel);
+    }
+
+    public void show() {
+        frame.setContentPane(loginPanel);
+        setupFrame();
+        init();
+    }
+
+    private void setupFrame() {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
         frame.setVisible(true);
-        logInForm.init();
     }
 
     private void init() {
@@ -47,6 +54,15 @@ public class LogInForm implements LoginPresenterContract.UI{
                                 return Unit.INSTANCE;
                             }
                         ));
+
+        loginBtn.addActionListener(e -> {
+            frame.getContentPane().removeAll();
+            MainForm form = new MainForm();
+            frame.setContentPane(form.getRootPanel());
+            frame.pack();
+            frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+            form.init();
+        });
     }
 
     void createUIComponents(){
