@@ -3,10 +3,8 @@ package ui.auth;
 import jiconfont.icons.FontAwesome;
 import jiconfont.swing.IconFontSwing;
 import kotlin.Unit;
-import org.jetbrains.annotations.NotNull;
-import presenter.Presenter;
+import models.auth.BambooPluginSettings;
 import presenter.auth.LoginPresenter;
-import presenter.auth.LoginPresenterContract;
 import ui.AsyncJButton;
 import ui.MainForm;
 import util.DialogUtilKt;
@@ -14,7 +12,7 @@ import util.DialogUtilKt;
 import javax.swing.*;
 import java.awt.*;
 
-public class LogInForm implements LoginPresenterContract.UI{
+public class LogInForm {
     private JTextField url;
     private JTextField username;
     private JPasswordField password;
@@ -43,9 +41,12 @@ public class LogInForm implements LoginPresenterContract.UI{
     }
 
     private void init() {
-        loginPresenter = new LoginPresenter(this);
+        loginPresenter = new LoginPresenter();
+        prefillCredential();
+        
+        
         testConnectionBtn.addActionListener(e ->
-                        loginPresenter.testConnection(
+                        loginPresenter.testConnection(url.getText(),
                             () -> {testConnectionBtn.startLoading(loginPresenter); return Unit.INSTANCE;},
                             () -> {
                                 // show a dialog showing test was successful
@@ -56,31 +57,30 @@ public class LogInForm implements LoginPresenterContract.UI{
                         ));
 
         loginBtn.addActionListener(e -> {
-            frame.getContentPane().removeAll();
-            MainForm form = new MainForm();
-            frame.setContentPane(form.getRootPanel());
-            frame.pack();
-            frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
-            form.init();
+            loginPresenter.login(username.getText(), new String(password.getPassword()),
+                    () -> {
+                        loginBtn.startLoading(loginPresenter);
+                        return Unit.INSTANCE;
+                    },
+                    () -> {
+                        frame.getContentPane().removeAll();
+                        MainForm form = new MainForm();
+                        frame.setContentPane(form.getRootPanel());
+                        frame.pack();
+                        frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+                        form.init();
+                        return Unit.INSTANCE;
+                    });
         });
     }
 
+    private void prefillCredential() {
+        url.setText(BambooPluginSettings.Companion.getInstance().getState().getUrl());
+        username.setText(BambooPluginSettings.Companion.getInstance().getState().getUsername());
+        password.setText(BambooPluginSettings.Companion.getInstance().getState().getPassword());
+    }
+
     void createUIComponents(){
-
-    }
-
-    @Override
-    public void login() {
-
-    }
-
-    @Override
-    public void startLoading(@NotNull Presenter presenter) {
-
-    }
-
-    @Override
-    public void stopLoading(@NotNull Presenter presenter) {
 
     }
 }
