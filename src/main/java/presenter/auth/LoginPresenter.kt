@@ -20,10 +20,11 @@ class LoginPresenter : LoginPresenterContract{
                 }
     }
 
-    override fun login(username: String, password: String, onStart: () -> Unit, onFinish : () -> Unit) {
+    override fun login(url : String, username: String, password: String, onStart: () -> Unit, onFinish : () -> Unit) {
         onStart.invoke()
         BambooPluginSettings.getInstance().state.username = username
         BambooPluginSettings.getInstance().state.password = password
+        BambooPluginSettings.getInstance().state.url = url
         HttpClient.api.login()
                 .compose(AsyncTransformer<Project, Project>())
                 .subscribe {
@@ -40,7 +41,7 @@ class LoginPresenter : LoginPresenterContract{
 
 interface LoginPresenterContract : Presenter {
 
-    fun login(username : String, password : String, onStart : () -> Unit, onFinish : () -> Unit)
+    fun login(url : String, username : String, password : String, onStart : () -> Unit, onFinish : () -> Unit)
 
     fun testConnection(url : String, onStart : () -> Unit, onFinish : () -> Unit)
 }

@@ -71,7 +71,7 @@ public class MainForm implements PlanPresenterContract.UI, BranchPresenterContra
         planList.removeAllItems();
         planListMouseListener = e -> {
             if (e.getStateChange() == ItemEvent.SELECTED)
-             branchPresenter.loadBranch(result.getResults().getResult().get(planList.getSelectedIndex()).getKey());
+                branchPresenter.loadBranch(result.getResults().getResult().get(planList.getSelectedIndex()).getKey());
         };
         planList.addItemListener(planListMouseListener);
         for (ResultItem item : result.getResults().getResult()) {

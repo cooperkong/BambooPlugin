@@ -57,7 +57,7 @@ public class LogInForm {
                         ));
 
         loginBtn.addActionListener(e -> {
-            loginPresenter.login(username.getText(), new String(password.getPassword()),
+            loginPresenter.login(url.getText(), username.getText(), new String(password.getPassword()),
                     () -> {
                         loginBtn.startLoading(loginPresenter);
                         return Unit.INSTANCE;
