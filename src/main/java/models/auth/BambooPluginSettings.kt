@@ -12,9 +12,7 @@ data class BambooPluginSettings(var url : String = "",
                                 var username : String = "",
                                 var password : String = "") : PersistentStateComponent<BambooPluginSettings> {
 
-    override fun getState(): BambooPluginSettings {
-      return this
-    }
+    override fun getState(): BambooPluginSettings = this
 
     override fun loadState(p0: BambooPluginSettings?) {
         XmlSerializerUtil.copyBean(state, this)

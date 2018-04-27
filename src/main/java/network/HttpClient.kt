@@ -1,5 +1,6 @@
 package network
 
+import models.auth.BambooPluginSettings
 import okhttp3.Credentials
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -14,23 +15,24 @@ import java.io.IOException
 class HttpClient {
     companion object {
         val api : Api
-        init {
-            val httpClient = OkHttpClient.Builder()
-            val interceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
+            get()  {
+                val bambooPluginSettings = BambooPluginSettings.getInstance()
+
+                val httpClient = OkHttpClient.Builder()
+                val interceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
                     println(it)
                 })
                 interceptor.level = HttpLoggingInterceptor.Level.BODY
-            httpClient.addInterceptor(BasicAuthInterceptor("<username>", "<password>"))
-                .addInterceptor(interceptor)
+                httpClient.addInterceptor(BasicAuthInterceptor(bambooPluginSettings.state.username, bambooPluginSettings.state.password))
+                        .addInterceptor(interceptor)
 
-            val retrofit = Retrofit.Builder()
-                .baseUrl("<bamboolink>")
-                .client(httpClient.build())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-            api = retrofit.create(Api::class.java)
-
+                val retrofit = Retrofit.Builder()
+                        .baseUrl(bambooPluginSettings.state.url + "rest/api/latest/")
+                        .client(httpClient.build())
+                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build()
+                 return retrofit.create(Api::class.java)
         }
     }
 }
