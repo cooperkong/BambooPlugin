@@ -10,7 +10,7 @@ import retrofit2.http.*
 
 interface Api {
 
-    // just to test the https connection
+    // just to test the https connection, test commit message
     @GET("userlogin.action")
     fun testConnection() : Completable
 
