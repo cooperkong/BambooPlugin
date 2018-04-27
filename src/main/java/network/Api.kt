@@ -14,7 +14,7 @@ interface Api {
     @GET("userlogin.action")
     fun testConnection() : Completable
 
-    // login call should try to retrive a list of projects (limit to max result 25)
+    // login call should try to retrieve a list of projects (limit to max result 25)
     @GET("project")
     fun login() : Single<Project>
 
