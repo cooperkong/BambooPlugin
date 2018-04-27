@@ -40,7 +40,11 @@ class AsyncTransformer<UpStream, DownStream> : CompletableTransformer,
 
                 override fun done() {
                     try {
-                        it.onComplete()
+                        if (get() == Unit) {
+                            it.onComplete()
+                        } else {
+                            it.onNext(get() as DownStream)
+                        }
                     } catch (e: InterruptedException) {
                         it.onError(e)
                     } catch (e: ExecutionException) {

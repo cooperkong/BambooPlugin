@@ -14,10 +14,10 @@ class PlanPresenter(private val ui : PlanPresenterContract.UI) : PlanPresenterCo
         ui.startLoading(this)
         api.getResult(showStage = "")
                 .compose(AsyncTransformer<Result, Result>())
-                .subscribe {
+                .subscribe( {
                     ui.stopLoading(this)
                     ui.showPlanList(it)
-                }
+                })
     }
 
 }
