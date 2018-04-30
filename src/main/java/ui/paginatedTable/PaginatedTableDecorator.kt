@@ -1,23 +1,22 @@
 package ui.paginatedTable
 
 import com.intellij.openapi.ui.ComboBox
-import com.sun.java.accessibility.util.AWTEventMonitor.addActionListener
-import javax.swing.event.TableModelEvent
-import javax.swing.Box.createHorizontalStrut
-import java.awt.GridLayout
+import com.intellij.ui.components.JBScrollPane
 import java.awt.BorderLayout
 import java.awt.Component
+import java.awt.GridLayout
 import java.awt.Insets
 import java.awt.event.ActionEvent
-import java.util.*
 import javax.swing.*
+import javax.swing.event.TableModelEvent
 import javax.swing.event.TableModelListener
 
 
-class PaginatedTableDecorator<T> private constructor(private val table: JTable, private val dataProvider: PaginationDataProvider<T>,
+class PaginatedTableDecorator<T> private constructor(private val container: JPanel,
+                                                     private val table: JTable, private val dataProvider: PaginationDataProvider<T>,
                                                      private val pageSizes: IntArray?, private var currentPageSize: Int) {
-    var contentPanel: JPanel? = null
-        private set
+//    var contentPanel: JPanel? = null
+//        private set
     private var currentPage = 1
     private lateinit var pageLinkPanel: JPanel
     private var objectTableModel: ObjectTableModel<T>? = null
@@ -40,10 +39,10 @@ class PaginatedTableDecorator<T> private constructor(private val table: JTable, 
     }
 
     private fun initPaginationComponents() {
-        contentPanel = JPanel(BorderLayout())
         val paginationPanel = createPaginationPanel()
-        contentPanel!!.add(paginationPanel, BorderLayout.NORTH)
-        contentPanel!!.add(JScrollPane(table))
+        container.layout = BorderLayout()
+        container.add(paginationPanel, BorderLayout.NORTH)
+        container.add(JBScrollPane(table))
     }
 
     private fun createPaginationPanel(): JPanel {
@@ -63,7 +62,7 @@ class PaginatedTableDecorator<T> private constructor(private val table: JTable, 
             paginationPanel.add(Box.createHorizontalStrut(15))
             paginationPanel.add(JLabel("Page Size: "))
             paginationPanel.add(pageComboBox)
-            pageComboBox.setSelectedItem(currentPageSize)
+            pageComboBox.selectedItem = currentPageSize
         }
         return paginationPanel
     }
@@ -141,10 +140,11 @@ class PaginatedTableDecorator<T> private constructor(private val table: JTable, 
         private val MaxPagingCompToShow = 9
         private val Ellipses = "..."
 
-        fun <T> decorate(table: JTable,
+        fun <T> decorate(container: JPanel,
+                         table: JTable,
                          dataProvider: PaginationDataProvider<T>,
                          pageSizes: IntArray, defaultPageSize: Int): PaginatedTableDecorator<T> {
-            val decorator = PaginatedTableDecorator(table, dataProvider,
+            val decorator = PaginatedTableDecorator(container, table, dataProvider,
                     pageSizes, defaultPageSize)
             decorator.init()
             return decorator
