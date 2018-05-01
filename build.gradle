@@ -30,6 +30,12 @@ intellij {
     pluginName 'BambooPlugin'
 }
 
+kotlin {
+    experimental {
+        coroutines 'enable'
+    }
+}
+
 
 allprojects {
     repositories {
@@ -50,4 +56,8 @@ dependencies {
     compile "com.squareup.retrofit2:converter-gson:2.2.0"
 
     compile "org.reactivestreams:reactive-streams:1.0.2"
+
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5"
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-swing:0.22.5"
+
 }
