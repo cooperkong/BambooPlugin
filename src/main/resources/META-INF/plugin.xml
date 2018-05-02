@@ -26,19 +26,14 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <!-- Add your extensions here -->
+    <toolWindow id="Bamboo" anchor="right" secondary="true"
+                icon="/icons/icon.png" factoryClass="com.bamboo.plugin.BambooPluginToolWindow">
+
+    </toolWindow>
   </extensions>
 
   <actions>
     <!-- Add your actions here -->
-      <!--<action id="com.bamboo.plugin.BambooPlugin" class="models.com.bamboo.plugin.BambooPlugin" text="com.bamboo.plugin.BambooPlugin"-->
-              <!--description="view plan and build status">-->
-          <!--<add-to-group group-id="ToolsMenu" anchor="first"/>-->
-          <!--<keyboard-shortcut keymap="$default" first-keystroke="shift meta B"/>-->
-      <!--</action>-->
-    <action id="com.bamboo.plugin.BambooPlugin" class="com.bamboo.plugin.BambooPlugin" text="BambooPlugin" description="BambooPlugin" icon="/icons/icon.png">
-      <add-to-group group-id="NavBarToolBarOthers" anchor="first"/>
-      <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt B"/>
-    </action>
   </actions>
 
   <extensions defaultExtensionNs="com.intellij">
