@@ -8,6 +8,8 @@ import java.awt.GridLayout
 import java.awt.Insets
 import java.awt.event.ActionEvent
 import javax.swing.*
+import javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS
+import javax.swing.JTable.AUTO_RESIZE_OFF
 import javax.swing.event.TableModelEvent
 import javax.swing.event.TableModelListener
 
@@ -41,8 +43,9 @@ class PaginatedTableDecorator<T> private constructor(private val container: JPan
     private fun initPaginationComponents() {
         val paginationPanel = createPaginationPanel()
         container.layout = BorderLayout()
-        container.add(paginationPanel, BorderLayout.NORTH)
-        container.add(JBScrollPane(table))
+        container.add(paginationPanel, BorderLayout.SOUTH)
+        table.autoResizeMode = AUTO_RESIZE_OFF
+        container.add(JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JBScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS))
     }
 
     private fun createPaginationPanel(): JPanel {
@@ -50,20 +53,20 @@ class PaginatedTableDecorator<T> private constructor(private val container: JPan
         pageLinkPanel = JPanel(GridLayout(1, MaxPagingCompToShow, 3, 3))
         paginationPanel.add(pageLinkPanel)
 
-        if (pageSizes != null) {
-            val pageComboBox = ComboBox(pageSizes.toTypedArray())
-            pageComboBox.addActionListener({ e: ActionEvent ->
-                //to preserve current rows position
-                val currentPageStartRow = (currentPage - 1) * currentPageSize + 1
-                currentPageSize = pageComboBox.selectedItem as Int
-                currentPage = (currentPageStartRow - 1) / currentPageSize + 1
-                paginate()
-            })
-            paginationPanel.add(Box.createHorizontalStrut(15))
-            paginationPanel.add(JLabel("Page Size: "))
-            paginationPanel.add(pageComboBox)
-            pageComboBox.selectedItem = currentPageSize
-        }
+//        if (pageSizes != null) {
+//            val pageComboBox = ComboBox(pageSizes.toTypedArray())
+//            pageComboBox.addActionListener({ e: ActionEvent ->
+//                //to preserve current rows position
+//                val currentPageStartRow = (currentPage - 1) * currentPageSize + 1
+//                currentPageSize = pageComboBox.selectedItem as Int
+//                currentPage = (currentPageStartRow - 1) / currentPageSize + 1
+//                paginate()
+//            })
+//            paginationPanel.add(Box.createHorizontalStrut(15))
+//            paginationPanel.add(JLabel("Page Size: "))
+//            paginationPanel.add(pageComboBox)
+//            pageComboBox.selectedItem = currentPageSize
+//        }
         return paginationPanel
     }
 
