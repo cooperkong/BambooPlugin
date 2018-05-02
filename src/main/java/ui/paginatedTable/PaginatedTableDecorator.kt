@@ -52,7 +52,7 @@ class PaginatedTableDecorator<T> private constructor(private val container: JPan
         val paginationPanel = JPanel()
         pageLinkPanel = JPanel(GridLayout(1, MaxPagingCompToShow, 3, 3))
         paginationPanel.add(pageLinkPanel)
-
+        //uncomment this to show paginate dropdown box
 //        if (pageSizes != null) {
 //            val pageComboBox = ComboBox(pageSizes.toTypedArray())
 //            pageComboBox.addActionListener({ e: ActionEvent ->
