@@ -1,5 +1,6 @@
 package ui
 
+import models.auth.BambooPluginSettings
 import models.expandedresult.Result
 import ui.renderer.BuildTableBuildColumnRenderer
 import ui.renderer.BuildTableBuildReasonColumnRenderer
@@ -54,7 +55,7 @@ class BuildDetailTable(private val table: JTable, val buildResult : Result) {
                         table.columnAtPoint(e.point) == 3 &&
                         (buildResult.buildTestSummary.endsWith("passed") ||
                         buildResult.buildTestSummary.endsWith("failed"))) {
-                    Desktop.getDesktop().browse(URL("https://bamboo.cd.auspost.com.au/bamboo/browse/"
+                    Desktop.getDesktop().browse(URL( BambooPluginSettings.getInstance().state.url
                             + buildResult.buildResultKey + "/test").toURI())
                 }
             }
