@@ -44,8 +44,7 @@ class PaginatedTableDecorator<T> private constructor(private val container: JPan
         val paginationPanel = createPaginationPanel()
         container.layout = BorderLayout()
         container.add(paginationPanel, BorderLayout.SOUTH)
-        table.autoResizeMode = AUTO_RESIZE_OFF
-        container.add(JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JBScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS))
+        container.add(JBScrollPane(table))
     }
 
     private fun createPaginationPanel(): JPanel {
