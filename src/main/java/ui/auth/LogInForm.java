@@ -30,26 +30,16 @@ public class LogInForm {
     private JPanel projectPanel;
     private JPanel loginPanel;
     private LoginPresenter loginPresenter;
-    private JFrame frame = new JFrame("BambooPlugin");
+//    private JFrame frame = new JFrame("BambooPlugin");
     Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
     static {
         IconFontSwing.register(FontAwesome.getIconFont());
     }
 
-    public void show() {
-        frame.setContentPane(rootPanel);
-        setupFrame();
+    public JPanel show() {
         init();
-    }
-
-    private void setupFrame() {
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.revalidate();
-        frame.pack();
-        frame.repaint();
-        frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
-        frame.setVisible(true);
+        return rootPanel;
     }
 
     private void init() {
@@ -102,7 +92,6 @@ public class LogInForm {
                 , new int[]{5, 10, 15, 20, 25}, 25);
         rootPanel.setPreferredSize(new Dimension(rootPanel.getPreferredSize().width
                 , projectPanel.getPreferredSize().height + loginPanel.getPreferredSize().height));
-        setupFrame();
     }
 
     private PaginationDataProvider<ProjectItem> createDataProvider(Project project) {
