@@ -9,6 +9,7 @@ import models.project.ProjectItem;
 import org.jetbrains.annotations.NotNull;
 import presenter.auth.LoginPresenter;
 import ui.AsyncJButton;
+import ui.MainForm;
 import ui.paginatedTable.ObjectTableModel;
 import ui.paginatedTable.PaginatedTableDecorator;
 import ui.paginatedTable.PaginationDataProvider;
@@ -30,8 +31,6 @@ public class LogInForm {
     private JPanel projectPanel;
     private JPanel loginPanel;
     private LoginPresenter loginPresenter;
-//    private JFrame frame = new JFrame("BambooPlugin");
-    Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
     static {
         IconFontSwing.register(FontAwesome.getIconFont());
@@ -65,9 +64,6 @@ public class LogInForm {
                         return Unit.INSTANCE;
                     },
                     project -> {
-//                        frame.getContentPane().removeAll();
-//                        MainForm form = new MainForm();
-//                        frame.setContentPane(form.getRootPanel());
                         projectPanel.setVisible(true);
                         loginBtn.stopLoading(loginPresenter);
                         initTable(project);
@@ -89,7 +85,14 @@ public class LogInForm {
     private void initTable(Project project) {
         projectTable.setModel(createProjectModel(project.getProjects().getProject()));
         PaginatedTableDecorator.Companion.decorate(projectPanel, projectTable, createDataProvider(project)
-                , new int[]{5, 10, 15, 20, 25}, 25);
+                , 25, () -> {
+                    // open build plan and builds form
+                    rootPanel.removeAll();
+                    MainForm mainForm = new MainForm();
+                    rootPanel.add(mainForm.getRootPanel());
+                    mainForm.init();
+                    return Unit.INSTANCE;
+                });
         rootPanel.setPreferredSize(new Dimension(rootPanel.getPreferredSize().width
                 , projectPanel.getPreferredSize().height + loginPanel.getPreferredSize().height));
     }

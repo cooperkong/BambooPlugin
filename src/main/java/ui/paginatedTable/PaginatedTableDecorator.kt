@@ -1,24 +1,18 @@
 package ui.paginatedTable
 
-import com.intellij.openapi.ui.ComboBox
 import com.intellij.ui.components.JBScrollPane
 import java.awt.BorderLayout
 import java.awt.Component
 import java.awt.GridLayout
 import java.awt.Insets
-import java.awt.event.ActionEvent
 import javax.swing.*
-import javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS
-import javax.swing.JTable.AUTO_RESIZE_OFF
 import javax.swing.event.TableModelEvent
 import javax.swing.event.TableModelListener
 
 
 class PaginatedTableDecorator<T> private constructor(private val container: JPanel,
                                                      private val table: JTable, private val dataProvider: PaginationDataProvider<T>,
-                                                     private val pageSizes: IntArray?, private var currentPageSize: Int) {
-//    var contentPanel: JPanel? = null
-//        private set
+                                                     private var currentPageSize: Int, private val onProjectSelected : () -> Unit) {
     private var currentPage = 1
     private lateinit var pageLinkPanel: JPanel
     private var objectTableModel: ObjectTableModel<T>? = null
@@ -51,21 +45,6 @@ class PaginatedTableDecorator<T> private constructor(private val container: JPan
         val paginationPanel = JPanel()
         pageLinkPanel = JPanel(GridLayout(1, MaxPagingCompToShow, 3, 3))
         paginationPanel.add(pageLinkPanel)
-        //uncomment this to show paginate dropdown box
-//        if (pageSizes != null) {
-//            val pageComboBox = ComboBox(pageSizes.toTypedArray())
-//            pageComboBox.addActionListener({ e: ActionEvent ->
-//                //to preserve current rows position
-//                val currentPageStartRow = (currentPage - 1) * currentPageSize + 1
-//                currentPageSize = pageComboBox.selectedItem as Int
-//                currentPage = (currentPageStartRow - 1) / currentPageSize + 1
-//                paginate()
-//            })
-//            paginationPanel.add(Box.createHorizontalStrut(15))
-//            paginationPanel.add(JLabel("Page Size: "))
-//            paginationPanel.add(pageComboBox)
-//            pageComboBox.selectedItem = currentPageSize
-//        }
         return paginationPanel
     }
 
@@ -97,8 +76,19 @@ class PaginatedTableDecorator<T> private constructor(private val container: JPan
         } else {
             addPageButtonRange(pageLinkPanel, buttonGroup, 1, pages)
         }
+        addSelectionButton()
         pageLinkPanel!!.parent.validate()
         pageLinkPanel!!.parent.repaint()
+    }
+
+    private fun addSelectionButton() {
+        val selectProjectBtn = JToggleButton("Go")
+        selectProjectBtn.addActionListener {
+            currentPage
+            table.selectedRow
+            onProjectSelected.invoke()
+        }
+        pageLinkPanel.add(selectProjectBtn)
     }
 
     private fun createEllipsesComponent(): Component {
@@ -145,9 +135,9 @@ class PaginatedTableDecorator<T> private constructor(private val container: JPan
         fun <T> decorate(container: JPanel,
                          table: JTable,
                          dataProvider: PaginationDataProvider<T>,
-                         pageSizes: IntArray, defaultPageSize: Int): PaginatedTableDecorator<T> {
+                         defaultPageSize: Int, onProjectSelected : () -> Unit): PaginatedTableDecorator<T> {
             val decorator = PaginatedTableDecorator(container, table, dataProvider,
-                    pageSizes, defaultPageSize)
+                    defaultPageSize, onProjectSelected)
             decorator.init()
             return decorator
         }
