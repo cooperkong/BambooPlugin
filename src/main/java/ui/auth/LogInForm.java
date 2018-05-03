@@ -85,16 +85,24 @@ public class LogInForm {
     private void initTable(Project project) {
         projectTable.setModel(createProjectModel(project.getProjects().getProject()));
         PaginatedTableDecorator.Companion.decorate(projectPanel, projectTable, createDataProvider(project)
-                , 25, () -> {
-                    // open build plan and builds form
-                    rootPanel.removeAll();
-                    MainForm mainForm = new MainForm();
-                    rootPanel.add(mainForm.getRootPanel());
-                    mainForm.init();
-                    return Unit.INSTANCE;
-                });
+                , 25, (page, row) -> openPlanForm(project, page, row));
         rootPanel.setPreferredSize(new Dimension(rootPanel.getPreferredSize().width
                 , projectPanel.getPreferredSize().height + loginPanel.getPreferredSize().height));
+    }
+
+    private Unit openPlanForm(Project project, Integer page, Integer row) {
+        // open build plan and builds form
+        rootPanel.removeAll();
+        MainForm mainForm = new MainForm();
+        rootPanel.add(mainForm.getRootPanel());
+        int index;
+        if (page > 1) {
+            index = row + 25 * page;
+        } else {
+            index = row;
+        }
+        mainForm.init(project.getProjects().getProject().get(index).getKey());
+        return Unit.INSTANCE;
     }
 
     private PaginationDataProvider<ProjectItem> createDataProvider(Project project) {

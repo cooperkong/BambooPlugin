@@ -21,7 +21,7 @@ interface Api {
     // ?expand=results[:9].result.stages.stage.results //show last 10 build's stages detail
     // includeAllStates will show builds that are in progress
     @GET("result/{projectKey}")
-    fun getResult(@Path("projectKey") projectKey : String = "MD",
+    fun getResult(@Path("projectKey") projectKey : String,
                   @Query("expand") showStage : String = "results[:9].result.stages.stage.results",
                   @Query("includeAllStates") includeAllStates : Boolean = true ) : Observable<Result>
 

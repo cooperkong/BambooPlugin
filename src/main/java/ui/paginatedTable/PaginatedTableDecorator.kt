@@ -12,7 +12,8 @@ import javax.swing.event.TableModelListener
 
 class PaginatedTableDecorator<T> private constructor(private val container: JPanel,
                                                      private val table: JTable, private val dataProvider: PaginationDataProvider<T>,
-                                                     private var currentPageSize: Int, private val onProjectSelected : () -> Unit) {
+                                                     private var currentPageSize: Int,
+                                                     private val onProjectSelected : (page : Int, row : Int) -> Unit) {
     private var currentPage = 1
     private lateinit var pageLinkPanel: JPanel
     private var objectTableModel: ObjectTableModel<T>? = null
@@ -84,9 +85,7 @@ class PaginatedTableDecorator<T> private constructor(private val container: JPan
     private fun addSelectionButton() {
         val selectProjectBtn = JToggleButton("Go")
         selectProjectBtn.addActionListener {
-            currentPage
-            table.selectedRow
-            onProjectSelected.invoke()
+            onProjectSelected.invoke(currentPage, table.selectedRow)
         }
         pageLinkPanel.add(selectProjectBtn)
     }
@@ -135,7 +134,7 @@ class PaginatedTableDecorator<T> private constructor(private val container: JPan
         fun <T> decorate(container: JPanel,
                          table: JTable,
                          dataProvider: PaginationDataProvider<T>,
-                         defaultPageSize: Int, onProjectSelected : () -> Unit): PaginatedTableDecorator<T> {
+                         defaultPageSize: Int, onProjectSelected : (page : Int, row : Int) -> Unit): PaginatedTableDecorator<T> {
             val decorator = PaginatedTableDecorator(container, table, dataProvider,
                     defaultPageSize, onProjectSelected)
             decorator.init()

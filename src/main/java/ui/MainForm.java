@@ -58,11 +58,11 @@ public class MainForm implements PlanPresenterContract.UI, BranchPresenterContra
         buildLoadingIcon.setVisible(false);
     }
 
-    public void init() {
+    public void init(String projectKey) {
         planPresenter = new PlanPresenter(this);
         buildPresenter = new BuildPresenter(this);
         branchPresenter = new BranchPresenter(this, buildPresenter);
-        planPresenter.loadPlan();
+        planPresenter.loadPlan(projectKey);
     }
 
     @Override
