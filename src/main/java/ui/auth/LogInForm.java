@@ -115,6 +115,7 @@ public class LogInForm {
             @NotNull
             @Override
             public List<ProjectItem> getRows(int startIndex, int endIndex) {
+                // call api to fetch next 25 items
                 return project.getProjects().getProject().subList(startIndex, endIndex);
             }
         };

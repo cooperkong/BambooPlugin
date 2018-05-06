@@ -30,8 +30,8 @@ import java.awt.event.ItemListener;
 public class MainForm implements PlanPresenterContract.UI, BranchPresenterContract.BranchUI, BuildPresenterContract.UI{
     private JComboBox planList;
     private JPanel rootPanel;
-    private AsyncProcessIcon projectPlanLoadingIcon;
-    private AsyncProcessIcon branchLoadingIcon;
+//    private AsyncProcessIcon projectPlanLoadingIcon;
+//    private AsyncProcessIcon branchLoadingIcon;
     private JComboBox branchList;
     private AsyncProcessIcon buildLoadingIcon;
     private AsyncJButton runBtn;
@@ -39,6 +39,8 @@ public class MainForm implements PlanPresenterContract.UI, BranchPresenterContra
     private JPanel buildPanel;
     private AsyncJButton stopBtn;
     private JTable buildsTable;
+    private AsyncJButton branchLoadingIcon2;
+    private AsyncJButton projectPlanLoadingIcon2;
     private PlanPresenterContract planPresenter;
     private BuildPresenterContract buildPresenter;
     private BranchPresenterContract branchPresenter;
@@ -51,10 +53,10 @@ public class MainForm implements PlanPresenterContract.UI, BranchPresenterContra
     }
 
     void createUIComponents(){
-        projectPlanLoadingIcon = new AsyncProcessIcon("loading...");
-        branchLoadingIcon = new AsyncProcessIcon("loading...");
+//        projectPlanLoadingIcon = new AsyncProcessIcon("loading...");
+//        branchLoadingIcon = new AsyncProcessIcon("loading...");
         buildLoadingIcon = new AsyncProcessIcon("loading...");
-        branchLoadingIcon.setVisible(false);
+//        branchLoadingIcon.setVisible(false);
         buildLoadingIcon.setVisible(false);
     }
 
@@ -71,7 +73,9 @@ public class MainForm implements PlanPresenterContract.UI, BranchPresenterContra
         planList.removeAllItems();
         planListMouseListener = e -> {
             if (e.getStateChange() == ItemEvent.SELECTED)
-                branchPresenter.loadBranch(result.getResults().getResult().get(planList.getSelectedIndex()).getKey());
+                branchPresenter.loadBranch(result.getResults().getResult().get(planList.getSelectedIndex()).getKey())
+                        .doOnSubscribe(disposable -> projectPlanLoadingIcon2.startLoading(null))
+                        .subscribe(branch -> showBranchList(branch));
         };
         planList.addItemListener(planListMouseListener);
         for (ResultItem item : result.getResults().getResult()) {
@@ -140,12 +144,6 @@ public class MainForm implements PlanPresenterContract.UI, BranchPresenterContra
     }
 
     private AsyncProcessIcon getLoadingIcon(Presenter presenter) {
-        if (presenter instanceof PlanPresenter) {
-            return projectPlanLoadingIcon;
-        }
-        if (presenter instanceof BranchPresenter) {
-            return branchLoadingIcon;
-        }
         if (presenter instanceof BuildPresenter) {
             return buildLoadingIcon;
         }

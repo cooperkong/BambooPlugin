@@ -1,5 +1,6 @@
 package presenter.branch
 
+import io.reactivex.Observable
 import models.branch.Branch
 import network.AsyncTransformer
 import network.HttpClient
@@ -21,25 +22,17 @@ class BranchPresenter(val ui : BranchPresenterContract.BranchUI,
                 }
     }
 
-    override fun loadBranch(key: String) {
-        ui.startLoading(this)
-        api.getProjectPlanBranches(key)
-                .compose(AsyncTransformer<Branch, Branch>())
-                .subscribe {
-                    ui.stopLoading(this)
-                    ui.showBranchList(it)
-                }
-    }
+    override fun loadBranch(key: String) : Observable<Branch> = api.getProjectPlanBranches(key)
+            .compose(AsyncTransformer<Branch, Branch>())
 }
 
 interface BranchPresenterContract : Presenter {
 
     fun startNewBuild(key: String, onStart: () -> Unit, onFinish: () -> Unit)
 
-    fun loadBranch(key : String)
+    fun loadBranch(key : String) : Observable<Branch>
 
     interface BranchUI : AsyncLoadUi {
         fun showBranchList(branch: Branch)
-
     }
 }
