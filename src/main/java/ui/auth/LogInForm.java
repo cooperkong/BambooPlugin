@@ -47,11 +47,11 @@ public class LogInForm {
 
         testConnectionBtn.addActionListener(e ->
                         loginPresenter.testConnection(url.getText(),
-                            () -> {testConnectionBtn.startLoading(loginPresenter); return Unit.INSTANCE;},
+                            () -> {testConnectionBtn.startLoading(); return Unit.INSTANCE;},
                             () -> {
                                 // show a dialog showing test was successful
                                 DialogUtilKt.showSuccessDialog(rootPanel);
-                                testConnectionBtn.stopLoading(loginPresenter);
+                                testConnectionBtn.stopLoading();
                                 return Unit.INSTANCE;
                             }
                         ));
@@ -60,12 +60,12 @@ public class LogInForm {
             loginPresenter.login(url.getText(), username.getText(), new String(password.getPassword()),
                     () -> {
                         projectPanel.setVisible(false);
-                        loginBtn.startLoading(loginPresenter);
+                        loginBtn.startLoading();
                         return Unit.INSTANCE;
                     },
                     project -> {
                         projectPanel.setVisible(true);
-                        loginBtn.stopLoading(loginPresenter);
+                        loginBtn.stopLoading();
                         initTable(project);
                         return Unit.INSTANCE;
                     });

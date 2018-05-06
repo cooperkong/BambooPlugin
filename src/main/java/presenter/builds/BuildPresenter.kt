@@ -15,12 +15,12 @@ class BuildPresenter(val ui : BuildPresenterContract.UI) : BuildPresenterContrac
     lateinit var buildResult : Result
 
     override fun loadBuilds(key: String) {
-        ui.startLoading(this)
+        ui.startLoadingBuilds()
         api.getResult(key)
                 .compose(AsyncTransformer<Result, Result>())
                 .subscribe {
                     buildResult = it
-                    ui.stopLoading(this)
+                    ui.stopLoadingBuilds()
                     ui.showBranchResult(it)
                 }
     }
@@ -45,5 +45,7 @@ interface BuildPresenterContract : Presenter {
 
     interface UI : AsyncLoadUi {
         fun showBranchResult(result: Result)
+        fun startLoadingBuilds()
+        fun stopLoadingBuilds()
     }
 }

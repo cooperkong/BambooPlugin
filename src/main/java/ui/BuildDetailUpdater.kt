@@ -23,13 +23,13 @@ class BuildDetailUpdater(val panel: JPanel,
         }
 
         val onFinish = {
-            stopRunBtn.stopLoading(buildPresenter)
+            stopRunBtn.stopLoading()
             buildPresenter.loadBuilds(resultItem.plan.planKey.key)
         }
 
         // reload build list after build is stopped
         stopRunBtn.addActionListener({ buildPresenter.stopBuild(resultItem.key,
-                { stopRunBtn.startLoading(buildPresenter) }, onFinish) })
+                { stopRunBtn.startLoading() }, onFinish) })
     }
 
     fun JPanel.findComponentById(name : String) : JComponent?  {

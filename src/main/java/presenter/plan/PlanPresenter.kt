@@ -11,11 +11,11 @@ class PlanPresenter(private val ui : PlanPresenterContract.UI) : PlanPresenterCo
     private val api = HttpClient.api
 
     override fun loadPlan(projectKey : String) {
-        ui.startLoading(this)
+        ui.startLoadingPlan()
         api.getResult(projectKey = projectKey, showStage = "")
                 .compose(AsyncTransformer<Result, Result>())
                 .subscribe( {
-                    ui.stopLoading(this)
+                    ui.stopLoadingPlan()
                     ui.showPlanList(it)
                 })
     }
@@ -25,6 +25,8 @@ class PlanPresenter(private val ui : PlanPresenterContract.UI) : PlanPresenterCo
 interface PlanPresenterContract : Presenter {
     interface UI : AsyncLoadUi{
         fun showPlanList(result: Result)
+        fun startLoadingPlan()
+        fun stopLoadingPlan()
     }
 
     fun loadPlan(projectKey : String)
