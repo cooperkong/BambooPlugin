@@ -1,6 +1,7 @@
 package ui.renderer
 
 import presenter.IconPresenter
+import java.awt.Color
 import java.awt.Component
 import javax.swing.DefaultListCellRenderer
 import javax.swing.ImageIcon
@@ -21,6 +22,12 @@ class ListItemWithIconRender(private val presenter: IconPresenter) : DefaultList
         }
         label.icon = icon
         label.horizontalTextPosition = JLabel.RIGHT
+        label.foreground = Color(51, 51, 51)
+        if (index % 2 == 0) {
+            label.background = Color(245, 245, 245)
+        } else {
+            label.background = Color(255, 255, 255)
+        }
         return label
     }
 }
