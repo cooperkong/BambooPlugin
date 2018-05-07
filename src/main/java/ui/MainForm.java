@@ -19,9 +19,10 @@ import presenter.plan.PlanPresenterContract;
 import ui.renderer.ListItemWithIconRender;
 
 import javax.swing.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 public class MainForm implements PlanPresenterContract.UI, BranchPresenterContract.BranchUI, BuildPresenterContract.UI{
@@ -42,6 +43,7 @@ public class MainForm implements PlanPresenterContract.UI, BranchPresenterContra
     private ActionListener runBtnListener;
     private ListSelectionListener buildSelectionListener;
     private ActionListener branchLoadingBtnActionListener;
+    private String buildKey;
 
     public JPanel getRootPanel() {
         return rootPanel;
@@ -58,6 +60,25 @@ public class MainForm implements PlanPresenterContract.UI, BranchPresenterContra
         branchPresenter = new BranchPresenter(this, buildPresenter);
         planPresenter.loadPlan(projectKey);
         projectPlanLoadingIcon2.addActionListener( a -> planPresenter.loadPlan(projectKey));
+        rootPanel.addAncestorListener(new AncestorListener() {
+            @Override
+            public void ancestorAdded(AncestorEvent event) {
+                // when user clicked on the tool window, should load builds list.
+                if (buildKey != null) {
+                    buildPresenter.loadBuilds(buildKey);
+                }
+            }
+
+            @Override
+            public void ancestorRemoved(AncestorEvent event) {
+
+            }
+
+            @Override
+            public void ancestorMoved(AncestorEvent event) {
+
+            }
+        });
     }
 
     @Override
@@ -83,8 +104,10 @@ public class MainForm implements PlanPresenterContract.UI, BranchPresenterContra
         branchList.removeAllItems();
         branchList.setRenderer(new ListItemWithIconRender(index -> IconFontSwing.buildIcon(FontAwesome.CODE_FORK, 16F, Gray._112)));
         branchListItemListener = e -> {
-            if (e.getStateChange() == ItemEvent.SELECTED)
-                buildPresenter.loadBuilds(branch.getBranches().getBranch().get(branchList.getSelectedIndex()).getKey());
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                buildKey = branch.getBranches().getBranch().get(branchList.getSelectedIndex()).getKey();
+                buildPresenter.loadBuilds(buildKey);
+            }
         };
         branchList.addItemListener(branchListItemListener);
         for (BranchItem item : branch.getBranches().getBranch()) {
@@ -126,6 +149,7 @@ public class MainForm implements PlanPresenterContract.UI, BranchPresenterContra
 
     @Override
     public void startLoadingBuilds() {
+        buildLoadingIcon.resume();
         buildLoadingIcon.setVisible(true);
     }
 

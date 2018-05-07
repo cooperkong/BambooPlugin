@@ -13,7 +13,7 @@ class BambooPluginToolWindow : ToolWindowFactory {
         toolWindow.contentManager.addContent(content)
     }
 
-    override fun shouldBeAvailable(project: Project): Boolean {
-        return true
-    }
+    override fun shouldBeAvailable(project: Project) = true
+
+    override fun isDoNotActivateOnStart() = true
 }
