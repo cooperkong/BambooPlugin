@@ -32,7 +32,6 @@ public class MainForm implements PlanPresenterContract.UI, BranchPresenterContra
     private AsyncJButton runBtn;
     private JPanel detailsPanel;
     private JPanel buildPanel;
-    private AsyncJButton stopBtn;
     private JTable buildsTable;
     private AsyncJButton branchLoadingIcon2;
     private AsyncJButton projectPlanLoadingIcon2;
