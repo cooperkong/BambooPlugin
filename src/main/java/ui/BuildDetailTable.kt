@@ -56,15 +56,11 @@ class BuildDetailTable(private val table: JTable, val buildResult : Result) {
                         (buildResult.buildTestSummary.endsWith("passed") ||
                         buildResult.buildTestSummary.endsWith("failed"))) {
                     Desktop.getDesktop().browse(URL( BambooPluginSettings.getInstance().state.url
-                            + buildResult.buildResultKey + "/test").toURI())
+                            + "browse/" +buildResult.buildResultKey + "/test").toURI())
                 }
             }
             override fun toString(): String = "buildtable_mouseAdapter"
         })
-
-
-        val comp2 = table.prepareRenderer(table.getCellRenderer(0, 1), 0, 1)
-        table.rowHeight = Math.max(table.rowHeight, comp2.preferredSize.height)
     }
 
 }
