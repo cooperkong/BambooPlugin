@@ -28,6 +28,7 @@ apply plugin: "kotlin"
 intellij {
     version '2017.2.5'
     pluginName 'BambooPlugin'
+    intellij.updateSinceUntilBuild false
 }
 
 kotlin {
