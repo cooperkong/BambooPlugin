@@ -53,6 +53,7 @@ class BuildDetailTable(private val table: JTable, val buildResult : Result) {
                 val buildResult = buildResult.results.result[table.rowAtPoint(e.point)]
                 if (Desktop.isDesktopSupported() &&
                         table.columnAtPoint(e.point) == 3 &&
+                        buildResult.buildTestSummary != null &&
                         (buildResult.buildTestSummary.endsWith("passed") ||
                         buildResult.buildTestSummary.endsWith("failed"))) {
                     Desktop.getDesktop().browse(URL( BambooPluginSettings.getInstance().state.url
