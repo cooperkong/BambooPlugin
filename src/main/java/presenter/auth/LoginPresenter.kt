@@ -1,12 +1,11 @@
 package presenter.auth
 
-import models.auth.BambooPluginSettings
+import persist.BambooPluginSettings
 import models.project.Project
 import network.AsyncTransformer
 import network.HttpClient
-import okhttp3.Credentials
 import presenter.Presenter
-import ui.AsyncLoadUi
+import kotlinx.coroutines.experimental.swing.Swing as UI
 
 class LoginPresenter : LoginPresenterContract{
 

@@ -3,7 +3,7 @@ package ui.auth;
 import jiconfont.icons.FontAwesome;
 import jiconfont.swing.IconFontSwing;
 import kotlin.Unit;
-import models.auth.BambooPluginSettings;
+import persist.BambooPluginSettings;
 import models.project.Project;
 import models.project.ProjectItem;
 import org.jetbrains.annotations.NotNull;

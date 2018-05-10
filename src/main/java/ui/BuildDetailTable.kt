@@ -1,6 +1,6 @@
 package ui
 
-import models.auth.BambooPluginSettings
+import persist.BambooPluginSettings
 import models.expandedresult.Result
 import ui.renderer.BuildTableBuildColumnRenderer
 import ui.renderer.BuildTableBuildReasonColumnRenderer
