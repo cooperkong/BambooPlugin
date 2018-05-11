@@ -73,9 +73,9 @@ public class LogInForm {
     }
 
     private void prefillCredential() {
-        url.setText(BambooPluginSettings.Companion.getInstance().getState().getUrl());
-        username.setText(BambooPluginSettings.Companion.getInstance().getState().getUsername());
-        password.setText(BambooPluginSettings.Companion.getInstance().getState().getPassword());
+        url.setText(BambooPluginSettings.getInstance().getState().url);
+        username.setText(BambooPluginSettings.getInstance().getState().username);
+        password.setText(BambooPluginSettings.getInstance().getState().password);
     }
 
     void createUIComponents(){
