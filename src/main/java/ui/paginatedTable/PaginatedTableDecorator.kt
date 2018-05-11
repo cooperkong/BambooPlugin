@@ -1,6 +1,7 @@
 package ui.paginatedTable
 
 import com.intellij.ui.components.JBScrollPane
+import com.intellij.util.ui.AsyncProcessIcon
 import java.awt.BorderLayout
 import java.awt.Component
 import java.awt.GridLayout
@@ -12,15 +13,19 @@ import javax.swing.event.TableModelListener
 
 class PaginatedTableDecorator<T> private constructor(private val container: JPanel,
                                                      private val table: JTable,
-                                                     private val dataProvider: PaginationDataProvider<T>,
                                                      private var currentPageSize: Int,
-                                                     private val onPageinatedButtonClicked : (page : Int, callback : (dataProvider : PaginationDataProvider<T>) -> Unit) -> Unit,
-                                                     private val onProjectSelected : (page : Int, row : Int) -> Unit) {
+                                                     private val onPageinatedButtonClicked : (page : Int) -> Unit) {
     private var currentPage = 1
     private lateinit var pageLinkPanel: JPanel
     private var objectTableModel: ObjectTableModel<T>? = null
+    private val loadingIcon = AsyncProcessIcon("loading...")
+    private val scrollTablePane = JBScrollPane(table)
+    lateinit var dataProvider : PaginationDataProvider<T>
+    var onProjectSelected : (row : Int) -> Unit = { _ -> Unit}
 
-    private fun init() {
+    fun init(dataProvider: PaginationDataProvider<T>) {
+        loadingIcon.isVisible = false
+        this.dataProvider = dataProvider
         initDataModel()
         initPaginationComponents()
         initListeners()
@@ -40,8 +45,9 @@ class PaginatedTableDecorator<T> private constructor(private val container: JPan
     private fun initPaginationComponents() {
         val paginationPanel = createPaginationPanel()
         container.layout = BorderLayout()
+        container.add(loadingIcon, BorderLayout.NORTH)
         container.add(paginationPanel, BorderLayout.SOUTH)
-        container.add(JBScrollPane(table))
+        container.add(scrollTablePane)
     }
 
     private fun createPaginationPanel(): JPanel {
@@ -87,7 +93,7 @@ class PaginatedTableDecorator<T> private constructor(private val container: JPan
     private fun addSelectionButton() {
         val selectProjectBtn = JToggleButton("Go")
         selectProjectBtn.addActionListener {
-            onProjectSelected.invoke(currentPage, table.selectedRow)
+            onProjectSelected.invoke(table.selectedRow)
         }
         pageLinkPanel.add(selectProjectBtn)
     }
@@ -113,12 +119,14 @@ class PaginatedTableDecorator<T> private constructor(private val container: JPan
             toggleButton.isSelected = true
         }
         toggleButton.addActionListener { ae ->
+            loadingIcon.isVisible = true
             currentPage = Integer.parseInt(ae.actionCommand)
-            onPageinatedButtonClicked.invoke((currentPage - 1) * 25 , { dataProvider ->  paginate(dataProvider) })
+            onPageinatedButtonClicked.invoke((currentPage - 1) * 25)
         }
     }
 
-    private fun paginate(dataProvider : PaginationDataProvider<T> = this.dataProvider) {
+    fun paginate() {
+        loadingIcon.isVisible = false
         val startIndex = (currentPage - 1) * currentPageSize
         var endIndex = startIndex + currentPageSize
         if (endIndex > dataProvider.totalRowCount) {
@@ -135,14 +143,9 @@ class PaginatedTableDecorator<T> private constructor(private val container: JPan
 
         fun <T> decorate(container: JPanel,
                          table: JTable,
-                         dataProvider: PaginationDataProvider<T>,
                          defaultPageSize: Int,
-                         onPaginatedButtonClicked : (page : Int, callback : (dataProvider : PaginationDataProvider<T>) -> Unit) -> Unit,
-                         onProjectSelected : (page : Int, row : Int) -> Unit): PaginatedTableDecorator<T> {
-            val decorator = PaginatedTableDecorator(container, table, dataProvider,
-                    defaultPageSize, onPaginatedButtonClicked, onProjectSelected)
-            decorator.init()
-            return decorator
+                         onPaginatedButtonClicked : (page : Int) -> Unit): PaginatedTableDecorator<T> {
+            return PaginatedTableDecorator(container, table, defaultPageSize, onPaginatedButtonClicked)
         }
     }
 }

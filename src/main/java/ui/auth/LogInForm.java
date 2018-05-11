@@ -3,12 +3,10 @@ package ui.auth;
 import jiconfont.icons.FontAwesome;
 import jiconfont.swing.IconFontSwing;
 import kotlin.Unit;
-import kotlin.jvm.functions.Function0;
-import kotlin.jvm.functions.Function2;
-import persist.BambooPluginSettings;
 import models.project.Project;
 import models.project.ProjectItem;
 import org.jetbrains.annotations.NotNull;
+import persist.BambooPluginSettings;
 import presenter.auth.LandingFormPresenter;
 import ui.AsyncJButton;
 import ui.MainForm;
@@ -19,7 +17,6 @@ import util.DialogUtilKt;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
-import java.awt.*;
 import java.util.List;
 
 public class LogInForm {
@@ -33,7 +30,7 @@ public class LogInForm {
     private JPanel projectPanel;
     private JPanel loginPanel;
     private LandingFormPresenter loginPresenter;
-
+    private PaginatedTableDecorator decorator;
     static {
         IconFontSwing.register(FontAwesome.getIconFont());
     }
@@ -86,17 +83,24 @@ public class LogInForm {
 
     private void initTable(Project project) {
         projectTable.setModel(createProjectModel(project.getProjects().getProject()));
-        PaginatedTableDecorator.Companion.decorate(projectPanel, projectTable, createDataProvider(project)
-                , 25
-                , (integer, callback) -> {
-                    loginPresenter.getProjects(integer, () -> Unit.INSTANCE,
-                                    nextProject -> callback.invoke(createDataProvider(nextProject)))
-                            .subscribe();
-                    return Unit.INSTANCE;
-                }
-                , (page, row) -> openPlanForm(project, row));
-        rootPanel.setPreferredSize(new Dimension(rootPanel.getPreferredSize().width
-                , projectPanel.getPreferredSize().height + loginPanel.getPreferredSize().height));
+        if (decorator == null) {
+            decorator = PaginatedTableDecorator.Companion.<ProjectItem>decorate(projectPanel, projectTable, 25
+                    , (currentPage) -> {
+                        loginPresenter.getProjects(currentPage,
+                                () -> Unit.INSTANCE,
+                                nextProject -> {
+                                    initTable(nextProject);
+                                    return Unit.INSTANCE;
+                                }).subscribe();
+                        return Unit.INSTANCE;
+                    });
+        }
+        decorator.init(createDataProvider(project));
+        decorator.paginate();
+        decorator.setOnProjectSelected(row -> {
+            openPlanForm(project, (Integer) row);
+            return Unit.INSTANCE;
+        });
     }
 
     private Unit openPlanForm(Project project, Integer row) {

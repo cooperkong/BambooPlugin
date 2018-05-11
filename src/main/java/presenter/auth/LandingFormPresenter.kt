@@ -1,16 +1,16 @@
 package presenter.auth
 
 import io.reactivex.Single
-import persist.BambooPluginSettings
 import models.project.Project
 import network.AsyncTransformer
 import network.HttpClient
+import persist.BambooPluginSettings
 import presenter.Presenter
 import kotlinx.coroutines.experimental.swing.Swing as UI
 
 class LandingFormPresenter : LandingFormPresenterContract{
 
-    val pageProjectsMap : MutableMap<Int, Project> = mutableMapOf()
+    private val pageProjectsMap : MutableMap<Int, Project> = mutableMapOf()
 
     override fun getProjects(startIndex: Int, onStart: () -> Unit, onFinish: (Project) -> Unit): Single<Project> {
         onStart.invoke()
@@ -40,7 +40,7 @@ class LandingFormPresenter : LandingFormPresenterContract{
     override fun login(url : String, username: String, password: String, onStart: () -> Unit, onFinish : (Project) -> Unit) {
         onStart.invoke()
         saveToSettings(url, username, password)
-        HttpClient.api.login()
+        HttpClient.api.getProjects()
                 .compose(AsyncTransformer<Project, Project>())
                 .subscribe {
                     list ->
@@ -53,6 +53,9 @@ class LandingFormPresenter : LandingFormPresenterContract{
                 }
     }
 
+    /**
+     * Plugin settings should be available after IDE restarts
+     */
     private fun saveToSettings(url: String, username: String, password: String) {
         BambooPluginSettings.getInstance().state.username = username
         BambooPluginSettings.getInstance().state.password = password
