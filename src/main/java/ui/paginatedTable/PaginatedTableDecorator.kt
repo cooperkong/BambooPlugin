@@ -11,8 +11,10 @@ import javax.swing.event.TableModelListener
 
 
 class PaginatedTableDecorator<T> private constructor(private val container: JPanel,
-                                                     private val table: JTable, private val dataProvider: PaginationDataProvider<T>,
+                                                     private val table: JTable,
+                                                     private val dataProvider: PaginationDataProvider<T>,
                                                      private var currentPageSize: Int,
+                                                     private val onPageinatedButtonClicked : (page : Int, callback : (dataProvider : PaginationDataProvider<T>) -> Unit) -> Unit,
                                                      private val onProjectSelected : (page : Int, row : Int) -> Unit) {
     private var currentPage = 1
     private lateinit var pageLinkPanel: JPanel
@@ -112,11 +114,11 @@ class PaginatedTableDecorator<T> private constructor(private val container: JPan
         }
         toggleButton.addActionListener { ae ->
             currentPage = Integer.parseInt(ae.actionCommand)
-            paginate()
+            onPageinatedButtonClicked.invoke((currentPage - 1) * 25 , { dataProvider ->  paginate(dataProvider) })
         }
     }
 
-    private fun paginate() {
+    private fun paginate(dataProvider : PaginationDataProvider<T> = this.dataProvider) {
         val startIndex = (currentPage - 1) * currentPageSize
         var endIndex = startIndex + currentPageSize
         if (endIndex > dataProvider.totalRowCount) {
@@ -134,9 +136,11 @@ class PaginatedTableDecorator<T> private constructor(private val container: JPan
         fun <T> decorate(container: JPanel,
                          table: JTable,
                          dataProvider: PaginationDataProvider<T>,
-                         defaultPageSize: Int, onProjectSelected : (page : Int, row : Int) -> Unit): PaginatedTableDecorator<T> {
+                         defaultPageSize: Int,
+                         onPaginatedButtonClicked : (page : Int, callback : (dataProvider : PaginationDataProvider<T>) -> Unit) -> Unit,
+                         onProjectSelected : (page : Int, row : Int) -> Unit): PaginatedTableDecorator<T> {
             val decorator = PaginatedTableDecorator(container, table, dataProvider,
-                    defaultPageSize, onProjectSelected)
+                    defaultPageSize, onPaginatedButtonClicked, onProjectSelected)
             decorator.init()
             return decorator
         }

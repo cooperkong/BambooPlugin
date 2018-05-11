@@ -18,6 +18,11 @@ interface Api {
     @GET("project")
     fun login() : Single<Project>
 
+
+    // login call should try to retrieve a list of projects (limit to max result 25)
+    @GET("project")
+    fun getProjects(@Query("start-index") startIndex : Int = 0) : Single<Project>
+
     // ?expand=results[:9].result.stages.stage.results //show last 10 build's stages detail
     // includeAllStates will show builds that are in progress
     @GET("result/{projectKey}")
