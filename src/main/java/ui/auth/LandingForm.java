@@ -19,7 +19,7 @@ import javax.swing.*;
 import javax.swing.table.TableModel;
 import java.util.List;
 
-public class LogInForm {
+public class LandingForm {
     private JTextField url;
     private JTextField username;
     private JPasswordField password;
@@ -83,6 +83,7 @@ public class LogInForm {
 
     private void initTable(Project project) {
         projectTable.setModel(createProjectModel(project.getProjects().getProject()));
+        projectTable.setRowHeight(30);
         if (decorator == null) {
             decorator = PaginatedTableDecorator.Companion.<ProjectItem>decorate(projectPanel, projectTable, 25
                     , (currentPage) -> {
