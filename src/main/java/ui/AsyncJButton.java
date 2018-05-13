@@ -13,6 +13,7 @@ public class AsyncJButton extends JButton implements AsyncLoadUi {
     private String text;
 
     public void startLoading() {
+        setEnabled(false);
         runIcon = getIcon();
         text = getText();
         setText("");
@@ -21,6 +22,7 @@ public class AsyncJButton extends JButton implements AsyncLoadUi {
     }
 
     public void stopLoading() {
+        setEnabled(true);
         remove(processIcon);
         setIcon(runIcon);
         setText(text);
