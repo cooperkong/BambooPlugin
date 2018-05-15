@@ -46,6 +46,13 @@
 
   <actions>
     <!-- Add your actions here -->
+    <action class="action.BackToLandingAction" id="BackToLandingAction" text="Back"
+            description="Back to landing form to select project"/>
+
+    <group id="BambooPlugin.BuildsAction" popup="false" text="">
+      <reference id="BackToLandingAction"/>
+    </group>
+
   </actions>
 
 </idea-plugin>

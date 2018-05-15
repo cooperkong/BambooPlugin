@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import persist.BambooPluginSettings;
 import presenter.auth.LandingFormPresenter;
 import ui.AsyncJButton;
-import ui.MainForm;
+import ui.BuildsForm;
 import ui.paginatedTable.ObjectTableModel;
 import ui.paginatedTable.PaginatedTableDecorator;
 import ui.paginatedTable.PaginationDataProvider;
@@ -107,7 +107,7 @@ public class LandingForm {
     private Unit openPlanForm(Project project, Integer row) {
         // open build plan and builds form
         rootPanel.removeAll();
-        MainForm mainForm = new MainForm();
+        BuildsForm mainForm = new BuildsForm();
         rootPanel.add(mainForm.getRootPanel());
         mainForm.init(project.getProjects().getProject().get(row).getKey());
         return Unit.INSTANCE;

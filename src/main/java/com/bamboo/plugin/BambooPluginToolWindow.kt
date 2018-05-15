@@ -7,12 +7,28 @@ import com.intellij.ui.content.ContentFactory
 import ui.auth.LandingForm
 
 class BambooPluginToolWindow : ToolWindowFactory {
+
+    private object Holder {
+        var toolWindow : ToolWindow? = null
+        val INSTANCE = BambooPluginToolWindow()
+    }
+
+    companion object {
+        val instance: BambooPluginToolWindow by lazy { Holder.INSTANCE }
+    }
+
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
-        val content = ContentFactory.SERVICE.getInstance().createContent(LandingForm().show(), "", false)
-        toolWindow.contentManager.addContent(content)
+        Holder.toolWindow = toolWindow
+        showLandingForm(toolWindow)
     }
 
     override fun shouldBeAvailable(project: Project) = true
 
     override fun isDoNotActivateOnStart() = true
+
+    fun showLandingForm(toolWindow: ToolWindow? = Holder.toolWindow) {
+        val content = ContentFactory.SERVICE.getInstance().createContent(LandingForm().show(), "", false)
+        toolWindow?.contentManager?.removeAllContents(true)
+        toolWindow?.contentManager?.addContent(content)
+    }
 }

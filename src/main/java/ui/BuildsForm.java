@@ -1,5 +1,7 @@
 package ui;
 
+import com.intellij.openapi.actionSystem.ActionGroup;
+import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.ui.Gray;
 import com.intellij.util.ui.AsyncProcessIcon;
 import jiconfont.icons.FontAwesome;
@@ -22,11 +24,12 @@ import javax.swing.*;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.ListSelectionListener;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-public class MainForm implements PlanPresenterContract.UI, BranchPresenterContract.BranchUI, BuildPresenterContract.UI{
+public class BuildsForm implements PlanPresenterContract.UI, BranchPresenterContract.BranchUI, BuildPresenterContract.UI{
     private JComboBox planList;
     private JPanel rootPanel;
     private JComboBox branchList;
@@ -37,6 +40,7 @@ public class MainForm implements PlanPresenterContract.UI, BranchPresenterContra
     private JTable buildsTable;
     private AsyncJButton branchLoadingIcon2;
     private AsyncJButton projectPlanLoadingIcon2;
+    private JPanel buildsToolbar;
     private PlanPresenterContract planPresenter;
     private BuildPresenterContract buildPresenter;
     private BranchPresenterContract branchPresenter;
@@ -80,6 +84,13 @@ public class MainForm implements PlanPresenterContract.UI, BranchPresenterContra
 
             }
         });
+        initToolbar(buildsToolbar);
+    }
+
+    private void initToolbar(JPanel buildsToolbar) {
+        ActionManager actionManager = ActionManager.getInstance();
+        ActionGroup actionGroup = (ActionGroup) actionManager.getAction("BambooPlugin.BuildsAction");
+        buildsToolbar.add(actionManager.createActionToolbar("BambooPluginBuildsConfig", actionGroup, true).getComponent(), BorderLayout.WEST);
     }
 
     @Override
