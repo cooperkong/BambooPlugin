@@ -1,5 +1,6 @@
 package ui.auth;
 
+import com.bamboo.plugin.BambooPluginToolWindow;
 import jiconfont.icons.FontAwesome;
 import jiconfont.swing.IconFontSwing;
 import kotlin.Unit;
@@ -106,10 +107,7 @@ public class LandingForm {
 
     private Unit openPlanForm(Project project, Integer row) {
         // open build plan and builds form
-        rootPanel.removeAll();
-        BuildsForm mainForm = new BuildsForm();
-        rootPanel.add(mainForm.getRootPanel());
-        mainForm.init(project.getProjects().getProject().get(row).getKey());
+        BambooPluginToolWindow.Companion.getInstance().showBuildForm(project.getProjects().getProject().get(row).getKey());
         return Unit.INSTANCE;
     }
 

@@ -1,5 +1,6 @@
 package ui
 
+import com.intellij.ide.BrowserUtil
 import persist.BambooPluginSettings
 import models.expandedresult.Result
 import ui.renderer.BuildTableBuildColumnRenderer
@@ -51,12 +52,11 @@ class BuildDetailTable(private val table: JTable, val buildResult : Result) {
         table.addMouseListener(object : MouseAdapter(){
             override fun mousePressed(e: MouseEvent) {
                 val buildResult = buildResult.results.result[table.rowAtPoint(e.point)]
-                if (Desktop.isDesktopSupported() &&
-                        table.columnAtPoint(e.point) == 3 &&
+                if (table.columnAtPoint(e.point) == 3 &&
                         buildResult.buildTestSummary != null &&
                         (buildResult.buildTestSummary.endsWith("passed") ||
                         buildResult.buildTestSummary.endsWith("failed"))) {
-                    Desktop.getDesktop().browse(URL( BambooPluginSettings.getInstance().state.url
+                    BrowserUtil.browse(URL( BambooPluginSettings.getInstance().state.url
                             + "browse/" +buildResult.buildResultKey + "/test").toURI())
                 }
             }
